@@ -22,6 +22,7 @@ public class Main {
             Scrum scrum = new Scrum(prepareProductBacklog());
             
             scrum.planSprint(2);
+            //scrum.reviewSprint();
             scrum.startSprint(14);
             scrum.doDailyScrum();               //Methode is empty
             scrum.reviewSprint();
