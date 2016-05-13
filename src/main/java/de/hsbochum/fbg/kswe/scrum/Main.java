@@ -23,18 +23,18 @@ public class Main {
             
             scrum.planSprint(2);
             scrum.startSprint(14);
-            
+            scrum.doDailyScrum();               //Methode is empty
             scrum.reviewSprint();
-            scrum.doSprintRetrospective(); //done added
+            scrum.doSprintRetrospective();      //done added
             
             scrum.planSprint(2);
-            //scrum.startSprint(10); //done edit see next line
+            //scrum.startSprint(10);            //done edit see next line
             scrum.startSprint(14);
-            
-            scrum.reviewSprint(); //done added
+            scrum.doDailyScrum();               //Methode is empty
+            scrum.reviewSprint();               //done added
             scrum.doSprintRetrospective();
             
-            //scrum.planSprint(2);  //done removed no BacklogItems for Sprint
+            //scrum.planSprint(2);              //done removed no BacklogItems for Sprint
 
         } catch (UnexpectedNextEventException | InitializationException |
                 InvalidSprintPeriodException ex) {
