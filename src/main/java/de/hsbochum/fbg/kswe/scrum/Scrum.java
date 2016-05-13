@@ -30,7 +30,7 @@ public class Scrum {
         this.productBacklog = pbl;
     }
 
-    private void moveToNextEvent(Event event) throws UnexpectedNextEventException, InitializationException {
+    private void moveToNextEvent(Event event) throws UnexpectedNextEventException, InitializationException, InvalidSprintPeriodException {
         LOG.info("Moving to next event...");
         Event previousEvent = null;
         
@@ -43,13 +43,23 @@ public class Scrum {
              * UnexpectedNextEventException if the order is not correct.
              * Hint: the method Class#isAssignableFrom() might be helpful
              */
+            previousEvent = this.currentEvent;
+            if(this.currentEvent.followingEventType().isAssignableFrom(event.getClass())){
+                this.currentEvent = event;
+                LOG.info(event.getClass().getCanonicalName());
+            }else{
+                String e = "No:\t"+event.getClass().getCanonicalName()+" is wrong";
+                LOG.info(e);
+                throw new InvalidSprintPeriodException("Wrong event");
+            }
+            
         }
         
         event.init(previousEvent, productBacklog);
         LOG.info("Moved to next event: {}", event);
     }
 
-    public void planSprint(int itemCount) throws UnexpectedNextEventException, InitializationException {
+    public void planSprint(int itemCount) throws UnexpectedNextEventException, InitializationException, InvalidSprintPeriodException {
         SprintPlanning planning = new SprintPlanning(itemCount);
         moveToNextEvent(planning);
     }
@@ -63,12 +73,12 @@ public class Scrum {
     public void doDailyScrum() {
     }
 
-    public void reviewSprint() throws UnexpectedNextEventException, InitializationException {
+    public void reviewSprint() throws UnexpectedNextEventException, InitializationException, InvalidSprintPeriodException {
         SprintReview review = new SprintReview();
         moveToNextEvent(review);
     }
 
-    public void doSprintRetrospective() throws UnexpectedNextEventException, InitializationException {
+    public void doSprintRetrospective() throws UnexpectedNextEventException, InitializationException, InvalidSprintPeriodException {
         SprintRetrospective retro = new SprintRetrospective();
         moveToNextEvent(retro);
     }

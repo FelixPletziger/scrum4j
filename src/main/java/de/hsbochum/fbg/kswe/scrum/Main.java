@@ -25,13 +25,16 @@ public class Main {
             scrum.startSprint(14);
             
             scrum.reviewSprint();
+            scrum.doSprintRetrospective(); //done added
             
             scrum.planSprint(2);
-            scrum.startSprint(10);
+            //scrum.startSprint(10); //done edit see next line
+            scrum.startSprint(14);
             
+            scrum.reviewSprint(); //done added
             scrum.doSprintRetrospective();
             
-            scrum.planSprint(2);
+            //scrum.planSprint(2);  //done removed no BacklogItems for Sprint
 
         } catch (UnexpectedNextEventException | InitializationException |
                 InvalidSprintPeriodException ex) {
